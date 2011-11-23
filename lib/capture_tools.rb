@@ -7,9 +7,13 @@ module CaptureTools
   require 'capture_tools/errors'
 
   class Api
-    Dir['./lib/capture_tools/api/*.rb'].each do |file|
-      require('capture_tools/api/' + File.basename(file, File.extname(file)))
-    end
+    require 'capture_tools/api/client'
+    require 'capture_tools/api/entity'
+    require 'capture_tools/api/entity_auth'
+    require 'capture_tools/api/entity_type'
+    require 'capture_tools/api/settings'
+
+    include CaptureTools::Api::Client
     include CaptureTools::Api::Entity
     include CaptureTools::Api::EntityAuth
     include CaptureTools::Api::EntityType
@@ -159,14 +163,13 @@ module CaptureTools
 
       value
     end
-  end
-
-  def nil_or_empty(it)
-    if it.nil? || (it.is_a? String && it.empty?)
-      true
-    else
-      false
+    def nil_or_empty(it)
+      if it.nil? || (it.is_a?(String) && it.empty?)
+        true
+      else
+        false
+      end
     end
+    alias :noe :nil_or_empty
   end
-  alias :neo :nil_or_empty
 end
