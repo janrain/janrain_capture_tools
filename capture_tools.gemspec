@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.description = 'You can find more information about Janrain Capture at https://janraincapture.com/ and http://janrain.com/'
   s.authors     = ['Andre Pinter']
   s.email       = 'endform@gmail.com'
-  s.files       = ['lib/capture_tools.rb']
+  s.files       = Dir['lib/**/*']
   s.homepage    = 'http://github.com/janrain/capture_tools'
   s.add_development_dependency 'rspec', '~> 2.7'
 end
