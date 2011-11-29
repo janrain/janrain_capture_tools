@@ -21,7 +21,7 @@ module CaptureTools
 
     include Errors
 
-    attr_reader :api_key, :base_url, :entity
+    attr_reader :base_url
 
     def initialize(arguments={}, logger=nil)
       @logger = logger
