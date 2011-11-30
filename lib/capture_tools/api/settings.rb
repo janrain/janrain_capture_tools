@@ -55,11 +55,11 @@ module CaptureTools::Api::Settings
   end
 
   def default_keys(arguments={})
-    api_call(arguments, 'settings/default_keys', false)
+    api_call(arguments, 'settings/default_keys')
   end
 
   def client_keys(arguments={})
-    api_call(arguments, 'settings/client_keys', false)
+    api_call(arguments, 'settings/client_keys')
   end
 
   def items(arguments={})
@@ -68,11 +68,11 @@ module CaptureTools::Api::Settings
   end
 
   def default_items(arguments={})
-    api_call(arguments, 'settings/default_items', false)
+    api_call(arguments, 'settings/default_items')
   end
 
   def client_items(arguments={})
     required_arg(arguments, :for_client_id)
-    api_call(arguments, 'settings/client_items', false)
+    api_call(arguments, 'settings/client_items')
   end
 end

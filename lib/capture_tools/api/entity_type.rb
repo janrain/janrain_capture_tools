@@ -41,8 +41,7 @@ module CaptureTools::Api::EntityType
       #TODO
     end
 
-    def list_entities(arguments={})
+    def entity_type_list(arguments={})
       api_call(arguments, 'entityType.list')
     end
-
 end
