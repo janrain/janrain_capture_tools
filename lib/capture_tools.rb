@@ -145,10 +145,11 @@ module CaptureTools
       get_arg(true, option_hash, key)
     end
 
-    def optional_arg(option_hash, key)
-      get_arg(false, option_hash, key)
+    def optional_arg(option_hash, key, default=nil)
+      r = get_arg(false, option_hash, key)
+      if r.nil? then default else r end
     end
-
+    
     def get_arg(is_required, option_hash, key)
       if option_hash.nil? || option_hash.class != Hash
         raise(CaptureHelperError.new(),
