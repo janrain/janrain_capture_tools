@@ -15,6 +15,7 @@ module CaptureTools::Api::Entity
 
   # DA
   def entity_count(arguments={})
+    optional_arg(arguments, :filter)
     api_call(arguments, 'entity.count')
   end
 
