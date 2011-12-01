@@ -56,4 +56,10 @@ module CaptureTools::Api::Entity
     headers = { 'Authorization' => "OAuth #{token}" }
     api_call(arguments, 'entity.update', headers)
   end
+  
+  def entity_history(arguments={})
+    required_arg(arguments, :uuid)
+    arguments[:max_results] = optional_arg(arguments, :max_results, 10)
+    api_call(arguments, 'versions/entity.list')
+  end  
 end
