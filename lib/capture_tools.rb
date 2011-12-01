@@ -75,6 +75,10 @@ module CaptureTools
       http.use_ssl = uri.scheme == 'https'
 
       req = Net::HTTP::Post.new(uri.path)
+
+      # net/http is the worst. An empty list value gets deleted from your query
+      query.each { |k, v| query[k] = v.to_s if v == [] }
+
       req.set_form_data(query)
       headers.each {|k, v| req[k] = v}
       http_res = nil # force scope
