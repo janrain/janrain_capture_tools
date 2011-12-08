@@ -38,7 +38,11 @@ module CaptureTools::Api::EntityType
 
     # DA
     def entity_type_set_access_schema(arguments={})
-      #TODO
+      required_arg(arguments, :type_name)
+      required_json_arg(arguments, :attributes)
+      required_arg(arguments, :access_type)
+      required_arg(arguments, :for_client_id)
+      api_call(arguments, 'entityType.setAccessSchema')
     end
 
     def entity_type_list(arguments={})
