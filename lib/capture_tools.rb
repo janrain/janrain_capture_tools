@@ -153,7 +153,7 @@ module CaptureTools
       r = get_arg(false, option_hash, key)
       if r.nil? then default else r end
     end
-    
+
     def get_arg(is_required, option_hash, key)
       if option_hash.nil? || option_hash.class != Hash
         raise(CaptureHelperError.new(),
