@@ -5,6 +5,7 @@ module CaptureTools::Api::EntityAuth
   # DA
   def get_access_token(arguments={})
     required_arg(arguments, :for_client_id)
+    optional_json_arg(arguments, :transaction_state)
     api_call(arguments, 'access/getAccessToken')
   end
 
