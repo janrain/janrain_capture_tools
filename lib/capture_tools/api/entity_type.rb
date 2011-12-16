@@ -24,6 +24,12 @@ module CaptureTools::Api::EntityType
       api_call(arguments, 'entityType.removeAttribute')
     end
 
+    def entity_type_rename_attribute(arguments={})
+      required_arg(arguments, :source_name)
+      required_arg(arguments, :target_name)
+      api_call(arguments, 'entityType.renameAttribute')
+    end
+
     # DA
     def entity_type_set_attribute_constraints(arguments={})
       required_arg(arguments, :attribute_name)
