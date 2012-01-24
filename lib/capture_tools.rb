@@ -22,6 +22,7 @@ module CaptureTools
     include Errors
 
     attr_reader :base_url
+    @@max_nesting = 100
 
     def initialize(arguments={}, logger=nil)
       @logger = logger
@@ -95,9 +96,9 @@ module CaptureTools
     def handle_response(http_res)
       if http_res.code == '200'
         begin
-          data = JSON.parse(http_res.body)
-        rescue JSON::ParserError => err
-          raise CaptureRemoteError.new(), 'Unable to parse JSON response'
+          data = JSON.parse(http_res.body, :max_nesting => @@max_nesting)
+        rescue JSON::ParserError, JSON::NestingError => err
+          raise CaptureRemoteError.new(), 'Unable to parse JSON response' + err.to_s
         end
       else
         raise CaptureRemoteError.new(),
@@ -127,8 +128,8 @@ module CaptureTools
       if !noe(value)
         if value.class == String
           begin
-            parsed = JSON.parse(value)
-          rescue JSON::ParserError => err
+            parsed = JSON.parse(value, :max_nesting => @@max_nesting)
+          rescue JSON::ParserError, JSON::NestingError => err
             raise(CaptureHelperError.new(),
                   "Capture Error: Unable to parse JSON\n Error: #{err}")
           end
