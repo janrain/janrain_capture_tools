@@ -41,7 +41,6 @@ module CaptureTools::Api::Entity
 
   # DA
   def entity_update(arguments={})
-    required_json_arg(arguments, :attributes)
     require_id(arguments)
     api_call(arguments, 'entity.update')
   end
