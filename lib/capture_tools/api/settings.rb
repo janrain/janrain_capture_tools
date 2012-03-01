@@ -10,7 +10,7 @@ module CaptureTools::Api::Settings
   end
 
   def set_multi(arguments={})
-    required_arg(arguments, :for_client_id)
+    optional_arg(arguments, :for_client_id)
     required_json_arg(arguments, :items)
     api_call(arguments, 'settings/set_multi')
   end
@@ -22,13 +22,13 @@ module CaptureTools::Api::Settings
   end
 
   def get(arguments={})
-    required_arg(arguments, :for_client_id)
+    optional_arg(arguments, :for_client_id)
     required_arg(arguments, :key)
     api_call(arguments, 'settings/get')
   end
 
   def get_multi(arguments={})
-    required_arg(arguments, :for_client_id)
+    optional_arg(arguments, :for_client_id)
     required_json_arg(arguments, :keys) # should be an array
     api_call(arguments, 'settings/get_multi')
   end
@@ -40,7 +40,7 @@ module CaptureTools::Api::Settings
 
   def delete(arguments={})
     required_arg(arguments, :key)
-    required_arg(arguments, :for_client_id)
+    optional_arg(arguments, :for_client_id)
     api_call(arguments, 'settings/delete')
   end
 
@@ -50,7 +50,7 @@ module CaptureTools::Api::Settings
   end
 
   def keys(arguments={})
-    required_arg(arguments, :for_client_id)
+    optional_arg(arguments, :for_client_id)
     api_call(arguments, 'settings/keys')
   end
 
@@ -63,7 +63,7 @@ module CaptureTools::Api::Settings
   end
 
   def items(arguments={})
-    required_arg(arguments, :for_client_id)
+    optional_arg(arguments, :for_client_id)
     api_call(arguments, 'settings/items')
   end
 
@@ -72,7 +72,7 @@ module CaptureTools::Api::Settings
   end
 
   def client_items(arguments={})
-    required_arg(arguments, :for_client_id)
+    optional_arg(arguments, :for_client_id)
     api_call(arguments, 'settings/client_items')
   end
 end
