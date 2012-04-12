@@ -24,7 +24,7 @@ module CaptureTools
     attr_reader :base_url
     @@max_nesting = 100
 
-    def initialize(arguments={}, logger=nil)
+    def initialize(arguments={}, logger=nil, options={})
       @logger = logger
       @base_url = required_arg(arguments, :base_url).sub(/\/*$/, '')
 
@@ -38,6 +38,7 @@ module CaptureTools
       unless noe(arguments[:entity])
         @authentication_args[:type_name] = arguments[:entity]
       end
+      @options = options
     end
 
     def escape_val(val)
@@ -74,6 +75,11 @@ module CaptureTools
       uri = URI.parse("#{@base_url}/#{method_name}")
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == 'https'
+
+      #net/http defaults to true
+      if @options[:ssl_verify_mode] == false
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
 
       req = Net::HTTP::Post.new(uri.path)
 
