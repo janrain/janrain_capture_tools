@@ -42,7 +42,7 @@ module CaptureTools
     end
 
     def escape_val(val)
-      val.gsub(/\'/) { |char| "\\'" }
+      val.gsub(/\\/){ |char| "\\\\" }.gsub(/\'/){ |char| "\\'" }
     end
 
     def slash
