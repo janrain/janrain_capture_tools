@@ -27,17 +27,29 @@ module CaptureTools
     def initialize(arguments={}, logger=nil, options={})
       @logger = logger
       @base_url = required_arg(arguments, :base_url).sub(/\/*$/, '')
+      @headers = {}
+      @authentication_args = {}
 
-      @headers = {
-        'X-Application-Id' => required_arg(arguments, :app_id)
-      }
-      @authentication_args = {
-        :client_id      => required_arg(arguments, :client_id),
-        :client_secret  => required_arg(arguments, :client_secret),
-      }
-      unless noe(arguments[:entity])
-        @authentication_args[:type_name] = arguments[:entity]
+      app_id = optional_arg(arguments, :app_id)
+      unless noe(app_id)
+        @headers['X-Application-Id'] = app_id
       end
+
+      client_id = optional_arg(arguments, :client_id)
+      unless noe(client_id)
+        @authentication_args[:client_id] = client_id
+      end
+
+      client_secret = optional_arg(arguments, :client_secret)
+      unless noe(client_secret)
+        @authentication_args[:client_secret] = client_secret
+      end
+
+      entity = optional_arg(arguments, :entity)
+      unless noe(entity)
+        @authentication_args[:type_name] = entity
+      end
+
       @options = options
     end
 
